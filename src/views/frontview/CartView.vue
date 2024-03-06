@@ -172,10 +172,10 @@ export default {
             .then((res)=>{
                 console.log(res, '送出訂單');
                 this.data={};
-                window.alert("送出訂單");
+                window.alert("請在開學日至Great Hall付款完成註冊手續");
                  window.location.href='./index.html#/home'
             }).catch((err)=>{
-                console.log(err)
+                 window.alert(err);
             })
         },
         isPhone(value){

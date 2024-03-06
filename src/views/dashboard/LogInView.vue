@@ -82,6 +82,8 @@ export default{
       const {token, expired} = res.data;
       console.log(token, expired)
       document.cookie = `floraFirstApiToken=${token}; expires=${new Date(expired)}`;
+      
+      window.location.reload();
       this.isLoading=false;
       //window.location.href='./index.html#/admin/products'
     })

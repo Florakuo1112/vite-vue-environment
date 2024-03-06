@@ -17,7 +17,7 @@ export default defineStore('checkLogin', {
         this.isLogin = true,
         console.log(this.isLogin)
         if(location.href == './index.html#/admin/login'){
-          location.replace(location.href);
+          window.location.reload();
         }
 
         return
