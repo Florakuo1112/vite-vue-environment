@@ -1,3 +1,4 @@
+//bs5
 import './assets/all.scss'
 
 import { createApp } from 'vue';

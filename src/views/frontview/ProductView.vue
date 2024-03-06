@@ -18,7 +18,6 @@
 const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
 
-//import axios from 'axios';
 //pinia
 import { mapActions, mapState } from "pinia";
 import cartStore from '../../stores/cartStore.js';

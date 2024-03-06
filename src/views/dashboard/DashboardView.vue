@@ -1,5 +1,5 @@
 <template>
-<h1>這是後台儀表板</h1>
+
 <RouterView></RouterView>
 </template>
 
