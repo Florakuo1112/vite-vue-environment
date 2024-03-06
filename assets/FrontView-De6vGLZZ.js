@@ -1,1 +1,0 @@
-import{_ as o,c as t,a as n,F as r,b as c,o as s,r as a}from"./index-PlEsYLOX.js";const _={},l=c("h1",null,"這是前台",-1);function i(m,u){const e=a("RouterView");return s(),t(r,null,[l,n(e)],64)}const f=o(_,[["render",i]]);export{f as default};
