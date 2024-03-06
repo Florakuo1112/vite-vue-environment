@@ -1,1 +1,0 @@
-import{_ as o,h as c,c as t,o as e}from"./index-PlEsYLOX.js";import{c as s}from"./checkLogin-B4iddkoJ.js";const n="https://vue3-course-api.hexschool.io/v2",r="florafirstapi",a={data(){return{}},methods:{...c(s,["checkLogin"])},mounted(){console.log(r,n),this.checkLogin()}};function i(p,h,_,l,m,u){return e(),t("h1",null,"後台的產品列表")}const k=o(a,[["render",i]]);export{k as default};
