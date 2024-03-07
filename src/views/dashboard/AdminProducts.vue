@@ -17,7 +17,7 @@ border-primary table-hover ">
     <tr>
       <th scope="col" class="text-center">Status</th>
       <th scope="col" class="text-center">Course</th>
-      <th scope="col" class="text-center">Professor</th>
+      <th scope="col" class="text-center">Prof</th>
       <th scope="col" class="text-center">Galleon</th>
       <th scope="col" class="text-center">Edit</th>
     </tr>
@@ -33,7 +33,7 @@ border-primary table-hover ">
       <td class="text-center">{{item.price}}</td>
       <td class="text-center">
         <button title='Alohomora ' class="bg-transparent border-0" @click='openModal(item)'>
-          <i class="fa-solid fa-key"></i>
+          <i class="fa-solid fa-key text-warning"></i>
         </button>
       </td>
     </tr>

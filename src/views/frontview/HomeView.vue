@@ -7,7 +7,7 @@ import * as bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 <div 
 style="background: center/ contain no-repeat url('https://i.pinimg.com/564x/fd/51/c9/fd51c9819dc403946c372d16c79b0e2a.jpg'); background-attachment:fixed" class="container">
 <div class="row  d-flex justify-content-center ">
-    <div class=" mb-5 col-12 col-lg-10" style="padding-bottom:200px; padding-top:200px">
+    <div class=" mb-5 col-12 col-lg-10 inContainer" >
         <h1 class='text-primary p-6 bg-warning rounded d-flex flex-column align-items-center' style="--bs-bg-opacity: .7;">
         <p style="font-size:40px"> Welcome To...</p>
         <p>
@@ -34,5 +34,12 @@ style="background: center/ contain no-repeat url('https://i.pinimg.com/564x/fd/5
 h1{
     font-family:'Amatic SC' ;
     font-weight: 900;
-}
+};
+.inContainer{
+    padding-top:200px;
+    padding-bottom:200px;
+    @media (max-width: 992px){
+        padding-top: 100px;
+    }
+};
 </style>>

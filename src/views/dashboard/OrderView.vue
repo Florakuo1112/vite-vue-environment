@@ -2,7 +2,25 @@
 <div class="bg-warning vh-100 ">
 <LaodingOverlay :active='isLoading'/>
     <div class="container">
+<div class="d-flex justify-content-lg-between flex-lg-row flex-column align-items-lg-center">
 <h1 class='pt-6 pb-2  text-primary'>學生選課資訊</h1>
+
+<div class="dropdown col-lg-4 border border-primary rounded-pill d-flex align-items-center" style="height:40px;">
+    
+    <i class="fa-brands fa-searchengin ms-4" style="font-size:24px"></i>
+
+  <input class="w-75 h-75" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+  style='border:none ;height:40px; background-color:transparent'
+  placeholder='查詢學生'  v-model='search'>
+  <ul class="dropdown-menu w-75" aria-labelledby="dropdownMenu2"
+  v-show="search">
+    <li  v-if='filterStudent.length==0' ><button class="dropdown-item" disabled>查無學生</button></li>
+    <li v-for='item in filterStudent' :key='item.user.name'><button class="dropdown-item" type="button" @click='openModal(item)' >{{item.user.name}} from {{item.user.address}}</button></li>
+  </ul>
+
+</div>
+</div>
+
 <table class=" table table-warning h6 table-hover table-bordered 
 border-primary">
     <thead>
@@ -53,6 +71,8 @@ export default {
             orderList:[],
             pages:{},
             isLoading:true,
+            search:'',
+            filterStudents:[],
             
         }
     },
@@ -73,9 +93,27 @@ export default {
             this.$refs.orderDetail.modalShow(order)
         },
     },
+    computed:{
+        filterStudent(){
+            return this.orderList.filter((item)=>{
+                // console.log(item.user.name.match(this.search));
+                return item.user.name.toLowerCase().match(this.search) 
+            })
+        }
+    },
     mounted(){
         this.checkLogin(),
         this.getAdminProductList()
     }
 }
 </script>
+
+<style>
+.dropdown{
+margin-top:70px;
+@media(max-width: 992px){
+   margin-top:0px;
+    margin-bottom:16px;
+}
+}
+</style>
