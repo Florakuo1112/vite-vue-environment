@@ -10,7 +10,9 @@
 
 <div class='container' >
 <h1 class='pt-6  text-secondary'>選課清單</h1>
-<table class=" table table-warning mt-4">
+<!-- pc -->
+<div class="d-none d-lg-block">
+<table class=" table table-warning mt-4 ">
     <thead>
         <tr style="font-family:'Amatic SC'; font-size:32px ">
         <th>Course</th>
@@ -35,6 +37,39 @@
     </tr>
     </tbody>
 </table>
+</div>
+<!-- 手機 -->
+
+<div class="d-lg-none">
+<table class=" table table-warning mt-4 ">
+    <thead>
+        <tr style="font-size:14px  " >
+        <th >Course</th>
+        <th >Detail</th>
+        <th >Evanesco</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr v-for='item in cart' :key="item.id" style="font-size:14px ">
+    
+        <th >{{item.product.title}}</th>
+        <th>
+            <ul>
+                <li  style='list-style:none'> Professor:{{item.product.content}}</li>
+                <li  style='list-style:none'>Credit:{{item.product.price/5000}}</li>
+                <li  style='list-style:none'>Time:{{item.product.time}}</li>
+                <li  style='list-style:none'>Galleon:{{item.final_total}}<i class="fa-brands fa-glide-g"></i></li>
+            </ul>
+        </th>
+          <th>
+              <button class="btn border-0 "><i class="fa-solid fa-trash" @click="removeItem(item.id)" style="font-size:14px"></i></button>
+         </th>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+
 <div class="d-flex justify-content-center">
 <v-form v-slot="{ errors }" @submit="onSubmit" class="text-secondary w-50" >
 
