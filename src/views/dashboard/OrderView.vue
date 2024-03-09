@@ -58,8 +58,9 @@ import axios from 'axios';
 import pagination from '../../components/OrderPagination.vue'
 import orderModal from '../../components/OrderModal.vue'
 //pinia
-import { mapActions } from "pinia";
+import {  mapState, } from "pinia";
 import checkLogin from '../../stores/checkLogin.js'
+
 
 export default {
     components:{
@@ -77,7 +78,6 @@ export default {
         }
     },
     methods:{
-        ...mapActions(checkLogin, ['checkLogin']),
         getAdminProductList(page=1){
             axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/orders?page=${page}`)
             .then((res)=>{
@@ -94,6 +94,7 @@ export default {
         },
     },
     computed:{
+        ...mapState(checkLogin, ['isLogin']),
         filterStudent(){
             return this.orderList.filter((item)=>{
                 // console.log(item.user.name.match(this.search));
@@ -102,8 +103,11 @@ export default {
         }
     },
     mounted(){
-        this.checkLogin(),
-        this.getAdminProductList()
+        this.getAdminProductList();
+        if(this.isLogin == false){
+         window.alert('請先登入');
+            this.$router.push('./login')
+        }
     }
 }
 </script>

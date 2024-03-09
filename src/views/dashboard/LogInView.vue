@@ -35,8 +35,8 @@
 </div>
 </div>
 
-<div v-else>
-  <h1 style='font-family:Amatic SC' class="d-flex flex-column align-items-center">
+<div v-else class="row d-flex flex-column align-items-center">
+  <h1 style='font-family:Amatic SC' class="d-flex flex-column align-items-center col-lg-5">
     <div>Messrs</div>
     <div style='font-size:48px'>Moony, Wormtail</div>
     <div style='font-size:48px'>Padfoot &  Prongs</div>
@@ -44,7 +44,16 @@
     <div style="font-weight:bold; font-size:48px">the</div>
      <div  style="font-weight:bold ; font-size:48px">Marauder's</div>
     <div  style="font-weight:bold; font-size:48px">map</div>
-  </h1>
+ 
+
+      <button class="btn btn-lg btn btn-outline-primary w-100 mt-3 d-flex align-items-center justify-content-center" 
+      type="button"  @click='logout'  >
+      <i class="fa-solid fa-hat-wizard mb-0" style="font-size:20px"></i>
+      <p style='font-family:Amatic SC ;font-size:32px' class="mb-0">
+      LOGOUT
+      </p>
+      </button>
+   </h1>
 </div>
 
 </div>
@@ -76,23 +85,46 @@ export default{
   methods:{
     ...mapActions(checkLogin, ['checkLogin']),
     login(){
+      this.isLoading=true;
       axios.post(`${VITE_URL}/admin/signin`, this.temp)
     .then((res)=>{
       console.log(res);
       const {token, expired} = res.data;
       console.log(token, expired)
       document.cookie = `floraFirstApiToken=${token}; expires=${new Date(expired)}`;
-      
-      window.location.reload();
+      this.isLogin = true;
       this.isLoading=false;
-      //window.location.href='./index.html#/admin/products'
+      this.checkLogin()
+
+    })
+    .catch((err)=>{
+     // console.log(err.response.data.message);
+      window.alert(err.response.data.message)
+      this.isLoading=false;
     })
     },
+    logout(){
+      console.log('logout')
+      this.isLoading=true;
+      axios.post(`${VITE_URL}/logout`)
+      .then((res)=>{
+        console.log(res.data.message);
+        if(res.data.message == '已登出'){
+          this.isLoading=false;
+          window.alert('Mischief Managed')
+          document.cookie = `floraFirstApiToken=; expires=${new Date()}`
+          this.checkLogin()
+        }
+      })
+      .catch((err)=>{
+        console.log(err);
+        this.isLoading=false;
+      })
+    }
   
 },
 mounted(){
-  console.log(VITE_PATH,VITE_URL)
-  this.checkLogin()
-  this.isLoading=false;
+ this.isLoading=false;
+
   },}
 </script>

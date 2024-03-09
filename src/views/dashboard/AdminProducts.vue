@@ -52,10 +52,11 @@ border-primary table-hover ">
 const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import axios from 'axios';
-//pinia
-import { mapActions } from "pinia";
-import checkLogin from '../../stores/checkLogin.js';
 import CourseModal from '../../components/CourseModal.vue';
+
+//pinia
+import {  mapState, } from "pinia";
+import checkLogin from '../../stores/checkLogin.js'
 
 
 export default{
@@ -69,8 +70,10 @@ export default{
 
     }
   },
+  computed:{
+    ...mapState(checkLogin, ['isLogin'])
+  },
   methods:{
-    ...mapActions(checkLogin, ['checkLogin']),
     getProduct(){
       axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/products/all`)
     .then((res)=>{
@@ -87,8 +90,12 @@ export default{
     }
     },
     mounted(){
-      this.checkLogin();
       this.getProduct();
+      // console.log(this.isLogin)
+       if(this.isLogin == false){
+       window.alert('請先登入');
+            this.$router.push('./login')
+        }
 
       },}
 </script>
