@@ -1,6 +1,6 @@
 <template>
 <LaodingOverlay :active='isLoading'/>
-<div class='bg-warning py-6  vh-100'>
+<div class='bg-warning vh-100'>
 <div class='container pt-6'>
 <div v-if='!isLogin' class="row d-flex flex-column align-items-center">
 <div  class=" col-lg-5 ">
@@ -125,6 +125,7 @@ export default{
 },
 mounted(){
  this.isLoading=false;
+ console.log(this.$route)
 
   },}
 </script>

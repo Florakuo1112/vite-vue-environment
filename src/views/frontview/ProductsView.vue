@@ -5,7 +5,7 @@
   <div class='container pb-5'>
        <!-- <pre>{{cart}}</pre> -->
     <h1 class='pt-6  text-secondary'>本學期課程</h1>
-    <toastview ref='toastRef' style="position:fixed; top:70px; right:0" ></toastview>
+    <toastview ref='toastRef' style="position:fixed; top:70px; right:0; z-index:100" ></toastview>
     <!-- pc -->
   <swiper
     :slidesPerView="2"

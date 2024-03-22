@@ -54,7 +54,10 @@ const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import * as bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 import axios from 'axios';
+
+
 export default {
+  props:['getAdminProductList'],
     data(){
         return{
             orderModal:null,
@@ -85,7 +88,7 @@ export default {
             console.log(res)
             this.orderModal.hide();
             alert(res.data.message);
-            window.location.reload();
+            this.getAdminProductList()
           
           })
           .catch((err)=>{

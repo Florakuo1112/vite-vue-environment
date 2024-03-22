@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 const VITE_URL = import.meta.env.VITE_APP_URL;
 import axios from 'axios';
-import { nextTick } from 'vue';
 
 export default defineStore('checkLogin', {
   state:()=>{
@@ -20,9 +19,10 @@ export default defineStore('checkLogin', {
 
         return
       }).catch((err)=>{
-        this.isLogin = false,
-        console.log('請重新登入', err.response.data.message);
-       // window.location.href='./admin/login'
+        this.isLogin = false
+        //console.log(err.response.data.message)
+        window.alert(err.response.data.message)
+
       })
   },
   }

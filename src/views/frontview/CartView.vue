@@ -35,6 +35,14 @@
               <button class="btn border-0 "><i class="fa-solid fa-trash" @click="removeItem(item.id)" style="font-size:24px"></i></button>
          </th>
     </tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Total Galleon</th>
+        <th>{{finalTotal}}</th>
+    </tr>
     </tbody>
 </table>
 </div>
@@ -65,10 +73,20 @@
               <button class="btn border-0 "><i class="fa-solid fa-trash" @click="removeItem(item.id)" style="font-size:14px"></i></button>
          </th>
     </tr>
+    <tr>
+        <th>Total Galleon</th>
+        <th></th>
+        <th>{{finalTotal}}</th>
+    </tr>
     </tbody>
 </table>
 </div>
 
+<div class="input-group mb-3">
+  <input type="text" class="form-control" v-model="code"
+  placeholder="Are You Qualified for Scholarship? ">
+  <button class="btn btn-outline-secondary" type="button"  @click='verify'>Verify</button>
+</div>
 
 <div class="d-flex justify-content-center">
 <v-form v-slot="{ errors }" @submit="onSubmit" class="text-secondary w-50" >
@@ -161,7 +179,7 @@ import zh_TW from "../../assets/zh_TW.json"
 
 const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
-
+import axios from 'axios';
 Object.keys(VeeValidateRules).forEach(rule => {
   VeeValidate.defineRule(rule, VeeValidateRules[rule]);
 });
@@ -191,11 +209,12 @@ export default {
                 }
             },
             isLoading:true,
+            code:''
 
         }
     },
     computed:{
-        ...mapState(cartStore, ['cart']),
+        ...mapState(cartStore, ['cart','finalTotal']),
     },
     methods:{
         ...mapActions(cartStore, ['getCartItem','removeItem']),
@@ -208,7 +227,7 @@ export default {
                 console.log(res, '送出訂單');
                 this.data={};
                 window.alert("請在開學日至Great Hall付款完成註冊手續");
-                 window.location.href='./index.html#/home'
+                 this.$router.push({name:'home'})
             }).catch((err)=>{
                  window.alert(err);
             })
@@ -216,6 +235,20 @@ export default {
         isPhone(value){
             const phoneNumber = /^(09)[0-9]{8}$/
             return phoneNumber.test(value) ? true : '請輸入有效電話號碼'
+        },
+        verify(){
+            const data = {
+                code: this.code
+            }
+            axios.post(`${VITE_URL}/api/${VITE_PATH}/coupon`,{data})
+            .then((res) => {
+                console.log(res)
+                window.alert('yes, you are qualified for scholarship')
+                this.getCartItem()
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
         }
     },
     mounted(){

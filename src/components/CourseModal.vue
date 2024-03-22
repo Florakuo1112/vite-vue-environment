@@ -55,7 +55,7 @@
   <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" 
   :checked='edit.is_enabled' v-model="edit.is_enabled">
   <label class="form-check-label" for="flexCheckChecked">
-    Checked checkbox
+   開放選課
   </label>
 </div>
 
@@ -131,7 +131,7 @@
   <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" 
   :checked='addCourse.is_enabled' v-model='addCourse.is_enabled'>
   <label class="form-check-label" for="flexCheckChecked">
-    Checked checkbox
+    開放選課
   </label>
 </div>
 
@@ -157,10 +157,11 @@ const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import axios from 'axios';
 import * as bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 export default {
+  props:['getProduct'],
     data(){
         return{
             professor:['Severus Snape', 'Filius Flitwick', 'Minerva McGonagall','Remus Lupin',
-            'Sybill Trelawney', 'Cuthbert Binns', 'Pomona Sprout','Rolanda Hooch','Rubeus Hagrid','Dolores Umbridge' ],
+            'Sybill Trelawney', 'Cuthbert Binns', 'Pomona Sprout','Rolanda Hooch','Rubeus Hagrid','Dolores Umbridge','Albus Dumbledore' ],
             price:[5000,10000,15000,20000],
             courseModal:null,
             time:['Mon:0900~1200','Mon:0200~0500','Tues:0900~1200','Tues:0200~0500',
@@ -209,7 +210,7 @@ export default {
                 console.log(res);
                 alert('Mischief managed');
                 this.courseModal.hide();
-                window.location.reload()
+                this.getProduct()
             })
             .catch((err)=>{
                 console.log(err)
@@ -224,7 +225,7 @@ export default {
                 console.log(res);
                 alert('Mischief managed');
                 this.courseModal.hide();
-                 window.location.reload()
+                 this.getProduct()
             })
             .catch((err)=>{
                 alert(err.response.data.message)
@@ -240,7 +241,7 @@ export default {
                 console.log(res);
                 alert('Mischief managed');
                 this.courseModal.hide();
-                 window.location.reload()
+                this.getProduct()
             })
             .catch((err)=>{
                 alert(err.response.data.message)

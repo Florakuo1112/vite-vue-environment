@@ -1,15 +1,14 @@
 <template>
-<div class="bg-warning vh-100 ">
 <LaodingOverlay :active='isLoading'/>
-    <div class="container">
-<div class="d-flex justify-content-lg-between flex-lg-row flex-column align-items-lg-center">
-<h1 class='pt-6 pb-2  text-primary'>學生選課資訊</h1>
+<div class="container vh-100 ">
+<div class="d-flex mb-2 justify-content-lg-between flex-lg-row flex-column align-items-lg-center">
+<h1 class=' pb-2  text-primary'>學生選課資訊</h1>
 
-<div class="dropdown col-lg-4 border border-primary rounded-pill d-flex align-items-center" style="height:40px;">
+<div class="dropdown col-lg-4 border border-primary rounded-pill d-flex align-items-center " style="height:40px;">
     
     <i class="fa-brands fa-searchengin ms-4" style="font-size:24px"></i>
 
-  <input class="w-75 h-75" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+  <input class="w-75 h-75 " id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
   style='border:none ;height:40px; background-color:transparent'
   placeholder='查詢學生'  v-model='search'>
   <ul class="dropdown-menu w-75" aria-labelledby="dropdownMenu2"
@@ -46,9 +45,9 @@ border-primary">
 <pagination :pages='pages' :getAdminProductList="getAdminProductList" style="position:fixed; bottom:50px" ></pagination>
 </div>
 
-<orderModal ref='orderDetail'></orderModal>
+<orderModal ref='orderDetail' :getAdminProductList='getAdminProductList'></orderModal>
 </div>
-</div>
+
 </template>
 
 <script>
@@ -103,11 +102,11 @@ export default {
         }
     },
     mounted(){
+      if(this.isLogin == false){
+        this.$router.push({name:'login'})
+      }else{
         this.getAdminProductList();
-        if(this.isLogin == false){
-         window.alert('請先登入');
-            this.$router.push('./login')
-        }
+      }
     }
 }
 </script>

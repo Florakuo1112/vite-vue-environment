@@ -9,6 +9,7 @@ export default defineStore('cartStore', {
         cart:[],
         courseList:[],
         status:'',
+        finalTotal:undefined,
     }),
     actions:{
         addToCart(id){
@@ -25,7 +26,7 @@ export default defineStore('cartStore', {
                 this.status=`${res.data.data.product.title}已加入選課清單`
                 //console.log(this.status)
                 this.qty = 1;
-                window.location.reload()
+                this.getCartItem()
             })
             .catch((err) => {
               console.error(err);
@@ -42,7 +43,8 @@ export default defineStore('cartStore', {
         getCartItem(){
            // console.log('getcart')
            axios.get(`${VITE_URL}/api/${VITE_PATH}/cart`).then((res)=>{
-               console.log(res.data.data.carts);
+               console.log(res.data.data.final_total);
+               this.finalTotal=res.data.data.final_total;
                this.cart=res.data.data.carts;
                const arr =res.data.data.carts;
                arr.forEach((item)=>{
@@ -59,7 +61,7 @@ export default defineStore('cartStore', {
             const itemId = id;
             axios.delete(`${VITE_URL}/api/${VITE_PATH}/cart/${itemId}`).then((res)=>{
                 console.log(res);
-                window.location.reload()
+                this.getCartItem()
             })
             .catch((err)=>{
                 console.log(err)

@@ -1,7 +1,7 @@
 <template>
 <LaodingOverlay :active='isLoading'/>
-<div class="bg-warning pb-6 ">
-<div class='container py-6 '>
+
+<div class='container py-4 vh-100  '>
   <h1>本學期課程清單</h1>
   <div class="d-flex justify-content-end mb-2">
   <button type="button" class="btn btn-outline-primary d-flex align-items-center mb-3 " @click='openModal(null)'>
@@ -39,9 +39,9 @@ border-primary table-hover ">
     </tr>
   </tbody>
 </table>
-<CourseModal ref='courseModal'></CourseModal>
+<CourseModal ref='courseModal' :getProduct='getProduct'></CourseModal>
 </div> 
-</div>
+
 
 
 
@@ -90,12 +90,12 @@ export default{
     }
     },
     mounted(){
-      this.getProduct();
-      // console.log(this.isLogin)
-       if(this.isLogin == false){
-       window.alert('請先登入');
-            this.$router.push('./login')
-        }
+      if(this.isLogin == false){
+        this.$router.push({name:'login'})
+      }else{
+              this.getProduct();
+      }
+
 
       },}
 </script>

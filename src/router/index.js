@@ -7,30 +7,25 @@ const router = createRouter({
   routes: [
     {
       path:'/',
-      component: () => import('../views/frontview/FrontView.vue'),
-      children:[
-        {
-          path: 'home',
-          name: 'home',
-          component: () => import('../views/frontview/HomeView.vue')
-        },
-        {
-          path: 'products',
-          name: 'Product List',
-          component: () => import('../views/frontview/ProductsView.vue')
-        },
-        {
-          path: 'products/:id',
-          name: 'Product',
-          component: () => import('../views/frontview/ProductView.vue')
-        },
-        {
-          path: 'cart',
-          name: 'cart',
-          component: () => import('../views/frontview/CartView.vue')
-        }
-      ]
+      name: 'home',
+      component: () => import('../views/frontview/HomeView.vue')
     },
+    {
+      path: '/products',
+      name: 'ProductList',
+      component: () => import('../views/frontview/ProductsView.vue')
+    },
+    {
+      path: '/products/:id',
+      name: 'Product',
+      component: () => import('../views/frontview/ProductView.vue')
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('../views/frontview/CartView.vue')
+    }
+,
     {
       path:'/admin',
       component: () => import('../views/dashboard/DashboardView.vue'),
@@ -49,14 +44,19 @@ const router = createRouter({
           name: 'order',
           component: () => import('../views/dashboard/OrderView.vue')
         },
+        {
+          path: 'coupon',
+          name: 'coupon',
+          component: () => import('../views/dashboard/CouponView.vue')
+        },
       ],
       
     },
     //404
-    {
-      path:'/:pathMatch(.*)*',
-      component:()=>import('../views/NotFound.vue')
-    },
+    // {
+    //   path:'/:pathMatch(.*)*',
+    //   component:()=>import('../views/NotFound.vue')
+    // },
 
 
   ]
