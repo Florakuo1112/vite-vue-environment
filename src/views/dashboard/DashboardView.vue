@@ -1,6 +1,6 @@
 <template>
-<div class="d-flex row pt-5 ">
-<ul class="list-group col-2 pt-4 vh-100 bg-primary px-3 " >
+<div class="d-flex row pt-5  vh-100">
+<ul class="list-group col-2 pt-4 bg-primary px-3 " >
   <li class="list-group-item bg-transparent border-0">
        <RouterLink to='/admin/products' class='text-secondary'><i class="fa-solid fa-landmark-dome me-2 " style='font-size:20px' ></i>課程管理</RouterLink> 
   </li>

@@ -65,7 +65,7 @@ import * as bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 
 
 export default {
-  props:['getCoupons'],
+  props:['getItem'],
     data(){
         return{
             couponModal:null,
@@ -89,7 +89,7 @@ export default {
           axios.put(`${VITE_URL}/api/${VITE_PATH}/admin/coupon/${id}`,{data})
           .then((res)=>{
             console.log(res.data.message)
-            this.getCoupons()
+            this.getItem()
             this.couponModal.hide()
           })
           .catch((err)=>{
@@ -99,7 +99,7 @@ export default {
           axios.post(`${VITE_URL}/api/${VITE_PATH}/admin/coupon`,{data} )
         .then((res) => {
           console.log(res.data.message)
-          this.getCoupons()
+          this.getItem()
           this.couponModal.hide()
           })
           .catch((err)=>{
@@ -121,8 +121,8 @@ export default {
           this.couponModal.show()
         }else{
           this.edit=false
-          this.couponModal.show(res.data.message)
-          this.getCoupons()
+          this.couponModal.show()
+          this.getItem()
           this.couponModal.hide()
         }
 
@@ -131,7 +131,7 @@ export default {
         axios.delete(`${VITE_URL}/api/${VITE_PATH}/admin/coupon/${id}`)
         .then((res)=>{
           console.log(res.data.message)
-          this.getCoupons()
+          this.getItem()
           this.couponModal.hide()
         })
         .catch((err)=>{

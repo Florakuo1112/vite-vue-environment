@@ -42,10 +42,10 @@ border-primary">
     </tbody>
 </table>
 <div class='d-flex justify-content-center'>
-<pagination :pages='pages' :getAdminProductList="getAdminProductList" style="position:fixed; bottom:50px" ></pagination>
+<pagination :pages='pages' :getItem='getItem'  ></pagination>
 </div>
 
-<orderModal ref='orderDetail' :getAdminProductList='getAdminProductList'></orderModal>
+<orderModal ref='orderDetail' :getItem='getItem' :pages='pages' ></orderModal>
 </div>
 
 </template>
@@ -54,7 +54,7 @@ border-primary">
 const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import axios from 'axios';
-import pagination from '../../components/OrderPagination.vue'
+import pagination from '../../components/PaginationView.vue'
 import orderModal from '../../components/OrderModal.vue'
 //pinia
 import {  mapState, } from "pinia";
@@ -77,7 +77,7 @@ export default {
         }
     },
     methods:{
-        getAdminProductList(page=1){
+        getItem(page=1){
             axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/orders?page=${page}`)
             .then((res)=>{
                 console.log(res)
@@ -105,7 +105,7 @@ export default {
       if(this.isLogin == false){
         this.$router.push({name:'login'})
       }else{
-        this.getAdminProductList();
+        this.getItem();
       }
     }
 }

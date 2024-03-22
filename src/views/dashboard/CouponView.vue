@@ -47,8 +47,10 @@ border-primary table-hover ">
     </tr>
   </tbody>
 </table>
+<pagination :pages='pages' :getItem='getItem'></pagination>
 </div> 
-<couponModal ref='coupon' :getCoupons='getCoupons'></couponModal>
+
+<couponModal ref='coupon' :getItem='getItem'></couponModal>
 </template>
 
 <script>
@@ -56,7 +58,7 @@ const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import axios from 'axios';
 import couponModal from '../../components/CouponModal.vue'
-
+import pagination from '../../components/PaginationView.vue'
 //pinia
 import {  mapState, } from "pinia";
 import checkLogin from '../../stores/checkLogin.js'
@@ -64,23 +66,26 @@ import checkLogin from '../../stores/checkLogin.js'
 
 export default {
     components:{
-        couponModal
+        couponModal,
+        pagination
     },
     data(){
         return{
             couponList:[],
             isLoading:true,
-            tempCoupon:{}
+            tempCoupon:{},
+            pages:{}
         }
     },
     methods:{
         openCouponModal(item){
            this.$refs.coupon.showModal(item)
         },
-        getCoupons(){
-        axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/coupons`)
+        getItem(page=1){
+        axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/coupons?page=${page}`)
         .then((res)=>{
             console.log(res);
+            this.pages = res.data.pagination;
             this.couponList=res.data.coupons;
             this.isLoading=false
         })
@@ -96,7 +101,7 @@ export default {
         if(this.isLogin == false){
         this.$router.push({name:'login'})
       }else{
-          this.getCoupons();
+          this.getItem();
       }
 
     }

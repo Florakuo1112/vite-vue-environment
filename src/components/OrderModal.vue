@@ -40,6 +40,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 
       </div>
       <div class="modal-footer">
+       
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
         <button type="button" class="btn btn-primary"  @click='save(currentOrder.id)'>Save Change</button>
       </div>
@@ -57,7 +58,7 @@ import axios from 'axios';
 
 
 export default {
-  props:['getAdminProductList'],
+  props:['getItem','pages'],
     data(){
         return{
             orderModal:null,
@@ -88,7 +89,7 @@ export default {
             console.log(res)
             this.orderModal.hide();
             alert(res.data.message);
-            this.getAdminProductList()
+            this.getItem(this.pages.current_page)
           
           })
           .catch((err)=>{
@@ -101,7 +102,7 @@ export default {
             keyboard:false,
             backdrop:'static'
         });
-       // this.orderModal.show()
+        console.log(this.pages)
     }
 
 }

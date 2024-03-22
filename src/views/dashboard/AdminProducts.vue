@@ -1,7 +1,7 @@
 <template>
 <LaodingOverlay :active='isLoading'/>
 
-<div class='container py-4 vh-100  '>
+<div class='container pt-4 pb-6  '>
   <h1>本學期課程清單</h1>
   <div class="d-flex justify-content-end mb-2">
   <button type="button" class="btn btn-outline-primary d-flex align-items-center mb-3 " @click='openModal(null)'>
@@ -33,13 +33,16 @@ border-primary table-hover ">
       <td class="text-center">{{item.price}}</td>
       <td class="text-center">
         <button title='Alohomora ' class="bg-transparent border-0" @click='openModal(item)'>
-          <i class="fa-solid fa-key text-warning"></i>
+          <i class="fa-solid fa-pen"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
-<CourseModal ref='courseModal' :getProduct='getProduct'></CourseModal>
+<div  class='d-flex justify-content-center'>
+<pagination :pages='pages' :getItem='getItem'></pagination>
+ </div>
+<CourseModal ref='courseModal' :getItem='getItem'></CourseModal>
 </div> 
 
 
@@ -53,32 +56,36 @@ const VITE_URL = import.meta.env.VITE_APP_URL;
 const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import axios from 'axios';
 import CourseModal from '../../components/CourseModal.vue';
+import pagination from '../../components/PaginationView.vue'
 
 //pinia
 import {  mapState, } from "pinia";
 import checkLogin from '../../stores/checkLogin.js'
 
 
+
 export default{
   components:{
-    CourseModal
+    CourseModal,
+    pagination
   },
   data(){
     return{
       productList:[],
       isLoading:true,
-
+      pages:{},
     }
   },
   computed:{
     ...mapState(checkLogin, ['isLogin'])
   },
   methods:{
-    getProduct(){
-      axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/products/all`)
+    getItem(page=1){
+      axios.get(`${VITE_URL}/api/${VITE_PATH}/admin/products?page=${page}`)
     .then((res)=>{
       console.log(res);
       this.productList = res.data.products;
+      this.pages = res.data.pagination;
       this.isLoading=false;
     }) 
     },
@@ -93,9 +100,15 @@ export default{
       if(this.isLogin == false){
         this.$router.push({name:'login'})
       }else{
-              this.getProduct();
+              this.getItem();
       }
 
 
       },}
 </script>
+
+<style>
+p{
+  margin-bottom: 0px;
+}
+</style>

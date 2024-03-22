@@ -51,12 +51,13 @@ const router = createRouter({
         },
       ],
       
-    },
+    }
+,
     //404
-    // {
-    //   path:'/:pathMatch(.*)*',
-    //   component:()=>import('../views/NotFound.vue')
-    // },
+    {
+      path:'/:pathMatch(.*)*',
+      component:()=>import('../views/frontview/NotFound.vue')
+    },
 
 
   ]

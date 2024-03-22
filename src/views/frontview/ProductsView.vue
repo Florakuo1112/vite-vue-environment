@@ -64,7 +64,6 @@
 
   </div>
 </div>
-
 </template>
 
 <script>
@@ -114,6 +113,7 @@ export default{
       .then((res)=>{
           this.productList = res.data.products;
           console.log(this.productList);
+          this.productPages = res.data.pagination
           this.isLoading=false;
       });
     },

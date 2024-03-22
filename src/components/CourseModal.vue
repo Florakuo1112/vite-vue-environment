@@ -157,7 +157,7 @@ const VITE_PATH = import.meta.env.VITE_APP_PATH;
 import axios from 'axios';
 import * as bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 export default {
-  props:['getProduct'],
+  props:['getItem'],
     data(){
         return{
             professor:['Severus Snape', 'Filius Flitwick', 'Minerva McGonagall','Remus Lupin',
@@ -210,7 +210,7 @@ export default {
                 console.log(res);
                 alert('Mischief managed');
                 this.courseModal.hide();
-                this.getProduct()
+                this.getItem()
             })
             .catch((err)=>{
                 console.log(err)
@@ -225,7 +225,7 @@ export default {
                 console.log(res);
                 alert('Mischief managed');
                 this.courseModal.hide();
-                 this.getProduct()
+                 this.getItem()
             })
             .catch((err)=>{
                 alert(err.response.data.message)
@@ -241,7 +241,7 @@ export default {
                 console.log(res);
                 alert('Mischief managed');
                 this.courseModal.hide();
-                this.getProduct()
+                this.getItem()
             })
             .catch((err)=>{
                 alert(err.response.data.message)
